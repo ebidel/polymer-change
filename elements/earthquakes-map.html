@@ -1,0 +1,188 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="../bower_components/google-map/google-map.html">
+<link rel="import" href="../bower_components/google-sheets/google-sheets.html">
+<link rel="import" href="../bower_components/core-ajax/core-ajax.html">
+<link rel="import" href="../bower_components/geo-location/geo-location.html">
+
+<polymer-element name="earthquakes-map" attributes="key aroundMe">
+  <template>
+    <style>
+      :host {
+        display: block;
+        font-family: "Open Sans", sans-serif;
+      }
+      google-map {
+        display: block;
+        flex: 3;
+      }
+      google-map:before {
+        opacity: 0;
+        /*pointer-events: none;*/
+        visibility: hidden;
+        content: 'finding your location...';
+        font-size: 30px;
+        color: rgba(0,0,0,0.1);
+        background: rgba(255,255,255,0.8);
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        z-index: 10;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding-bottom: 100px;
+        transition: opacity 500ms ease-in-out;
+      }
+      google-map.loading:before {
+        opacity: 1;
+        visibility: visible;
+      }
+      ul {
+        font-weight: 300;
+        background: rgb(67, 135, 253);
+        color: white;
+        overflow: auto;
+        margin: 0;
+        padding: 0;
+        flex: 1;
+        position: relative;
+        z-index: 20;
+        box-shadow: 0 0 7px #555;
+      }
+      li {
+        list-style: none;
+        padding: 15px 30px;
+        cursor: pointer;
+      }
+      li:hover {
+        background: #fff;
+        color: black;
+      }
+      h4 {
+        margin: 0 0 10px 0;
+      }
+      .date {
+        font-size: 12px;
+      }
+      h2 {
+        position: absolute;
+        z-index: 11;
+        font-weight: 400;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        padding: 10px;
+        margin: 0;
+        color: black;
+        background: rgba(255,255,255,0.6);
+        text-transform: uppercase;
+        letter-spacing: 1px;
+      }
+      section {
+        display: flex;
+        height: 100%;
+      }
+      @media (max-width: 768px) {
+        section {
+          flex-direction: column;
+        }
+        google-map {
+          flex: 2;
+        }
+        h2 {
+          z-index: 100;
+          text-align: center;
+          background: #fff;
+          /*color: white;*/
+          box-shadow: 0 0px 7px #555;
+        }
+      }
+    </style>
+    <!-- <google-sheets key="{{key}}" rows="{{rows}}" published></google-sheets> -->
+
+    <h2><span hidden?="{{!response.features.length}}">{{response.features.length}}</span> earthquakes ~24hrs</h2>
+
+    <template if="{{aroundMe}}">
+      <geo-location latitude="{{lat}}" longitude="{{lng}}" on-geo-response="{{onGeoResponse}}"></geo-location>
+    </template>
+    
+    <core-ajax auto handleAs="json"
+        url="http://jsonp.jit.su/?url=http://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_day.geojson" response="{{response}}"></core-ajax>
+
+    <section>
+        <google-map id="map" class="{{ {loading: aroundMe} | tokenList}}" latitude="{{lat}}" longitude="{{lng}}" zoom="12"><!--  fittomarkers> -->
+          <!-- <template repeat="{{row, i in rows}}">
+            <google-map-marker latitude="{{row.gsx$lat.$t}}" longitude="{{row.gsx$lng.$t}}">
+              <h2>{{row.gsx$name.$t}}</h2>
+              <p>
+                {{row.gsx$address.$t}}<br>
+                {{row.gsx$city.$t}}, {{row.gsx$state.$t}}<br>
+                {{row.gsx$phone.$t}}
+              </p>
+            </google-map-marker>
+          </template> -->
+          <template repeat="{{f, i in response.features}}">
+            <google-map-marker latitude="{{f.geometry.coordinates[1]}}" longitude="{{f.geometry.coordinates[0]}}">
+              <h2>magnitude: {{f.properties.mag}}</h2>
+              <p>{{f.properties.place}}</p>
+            </google-map-marker>
+          </template>
+        </google-map>
+
+         <ul>
+          <template repeat="{{f, i in response.features}}">
+           <li on-tap="{{openWindow}}">
+              <h4>{{f.properties.place}}</h4>
+              <div>Magnitude: {{f.properties.mag}}</div>
+              <p class="date">{{f.properties.time | formatDate}}</p>
+            </li>
+          </template>
+        </ul>
+     
+        <!-- <ul>
+          <template repeat="{{row, i in rows}}">
+            <li on-tap="{{openWindow}}">
+              <h4>{{row.gsx$name.$t}}</h4>
+              <div>
+                {{row.gsx$address.$t}}<br>
+                {{row.gsx$city.$t}}, {{row.gsx$state.$t}}<br>
+                {{row.gsx$phone.$t}}
+              </div>
+            </li>
+          </template>
+        </ul> -->
+    </section>
+
+  </template>
+  <script>
+    Polymer({
+      aroundMe: false,
+      openInfoWindow: null,
+      lat: null,
+      lng: null,
+      onGeoResponse: function() {
+        this.$.map.classList.remove('loading');
+      },
+      openWindow: function(e, detail, sender) {
+        var i = e.target.templateInstance.model.i;
+        var marker = this.$.map.markers[i];
+
+        if (!marker.info) {
+          return;
+        }
+
+        if (this.openInfoWindow && this.openInfoWindow != marker.info) {
+          this.openInfoWindow.close();
+        }
+
+        this.openInfoWindow = marker.info;
+        this.openInfoWindow.open(this.$.map.map, marker.marker);
+      },  
+      formatDate: function(val) {
+        return new Date(val);
+      }
+    });
+  </script>
+</polymer-element>

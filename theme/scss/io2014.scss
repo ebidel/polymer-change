@@ -1,0 +1,212 @@
+@import "variables";
+@import "mixins";
+@import "animations";
+
+// Slide colors.
+$brand-blue: rgb(66, 133, 255);
+$brand-red: rgb(219, 68, 65);
+$brand-yellow: rgb(244, 180, 0);
+$brand-green: rgb(15, 167, 88);
+$brand-dark-gray: rgb(66,66,66);
+
+$slide-left-right-padding: 40px;
+$bodyTextColor: rgb(64,64,64);
+
+.fill {
+  .faded {
+    color: rgba(255, 255, 255, 0.6);
+  }
+
+  h2 {
+    color: #fff;
+    font-weight: 400;
+
+    em {
+      font-style: normal;
+      color: #fff;
+    }
+  }
+}
+
+ul > li::before {
+  // content: '·';
+  // font-weight: 600;
+  background: none;
+  // margin-left: -1em;
+}
+
+pre:not(.fill) {
+  @include width-fit-content();
+
+  // &.prettyprint:not(.nohighlight) {
+  //   background-color: rgb(232,232,232);
+  // }
+}
+
+// IO theme.
+// .prettyprint pre { font-family: "Inconsolata"; font-size: 40px; }
+.prettyprint .pln { color: #000 }  /* plain text */
+.prettyprint .str,
+.prettyprint .atv { color: #0f9d58 }  /* string content and attribute value */
+.prettyprint .kwd,
+.prettyprint .tag { color: #4285f4;  }  /* a keyword or tag */
+.prettyprint .com { color: #999 }  /* a comment */
+.prettyprint .typ,
+.prettyprint .var { color: #673ab7 }  /* a type name or xq variable */
+.prettyprint .lit { color: #ff9800 }  /* a literal value */
+.prettyprint .pun,
+.prettyprint .opn,
+.prettyprint .clo { color: #a3a3a3 } /* punctuation, lisp open bracket, lisp close bracket */
+.prettyprint .atn { color: #e91e63 }  /* a markup attribute name */
+.prettyprint .dec,
+.prettyprint .var { color: #e67c73 }  /* a declaration like doctype */
+.prettyprint .fun { color: #fff }  /* a function name */
+
+a {
+  border-bottom: none;
+  color: currentcolor;
+}
+
+h2 {
+  font-weight: 400;
+}
+
+h3 {
+  font-family: 'Roboto Condensed', sans-serif;
+  font-weight: 400;
+  letter-spacing: initial;
+  color: $gray-2;
+}
+
+h4 {
+  font-family: 'Roboto Condensed', sans-serif;
+  line-height: 2;
+  font-size: 30px;
+}
+
+body {
+  color: $bodyTextColor;
+
+  &[class*="google"] {
+    
+    slide {
+      &::before {
+        display: none;
+      }
+      &::after {
+        background-image: url(../../images/io2014_icon_white.png) !important;
+        opacity: 0.3 !important;
+      }
+    }
+  }
+
+  &.black {
+    @extend .fill;
+    background: black;
+  }
+  &.googleblue {
+    @extend .fill;
+    background: $brand-blue;
+  }
+  &.googlered {
+    @extend .fill;
+    background: $brand-red;
+  }
+  &.googleyellow {
+    @extend .fill;
+    background: $brand-yellow;
+  }
+  &.googlegreen {
+    @extend .fill;
+    background: $brand-green;
+  }
+  &.googlegray {
+    @extend .fill;
+    background: $brand-dark-gray;
+  }
+}
+
+pre, code {
+  font-family: 'Inconsolata';
+}
+
+slides > slide {
+  border-radius: 0;
+  font-family: 'Roboto2', sans-serif;
+  padding: 0 $slide-left-right-padding;
+
+  &.segue {
+    padding: 0 $slide-left-right-padding * 2;
+    color: #fff;
+
+    h2 {
+      font-size: 65px;
+      line-height: 1.5;
+      color: inherit;
+    }
+    h3 {
+      font-size: 50px;
+      line-height: 1.5;
+      color: inherit;
+    }
+    hgroup {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-start;
+      height: 100%;
+    }
+  }
+
+
+  &:not(.nobackground) {
+    &::before, &::after {
+      bottom: 0;
+      left: initial;
+    }
+    &::after {
+      right: $slide-left-right-padding;
+      background: url(../../images/io2014_icon_dark.png) no-repeat 100% 10px;
+      background-size: contain;
+      height: 60px;
+      width: 75px;
+      padding-right: 50px;
+      display: flex;
+      align-items: flex-end;
+      opacity: 0.15;
+      content: attr(data-slide-num) '/' attr(data-total-slides);
+    }
+  }
+
+  > article:not(:only-child) {
+    &.flexbox {
+      margin: 0;
+      height: calc(100% - 70px) !important;
+    }
+
+    h3 {
+      font-size: 40px;
+    }
+  }
+  
+}
+
+// Specific slides
+
+slide#who {
+  article {
+    h2, h3 {
+      line-height: initial;
+    }
+    h3:first-of-type {
+      color: inherit;
+    }
+  }
+
+  img {
+    border-radius: 50%;
+    border: 7px solid #fff;
+    box-shadow: 0 0 7px $gray-3;
+  }
+}
+

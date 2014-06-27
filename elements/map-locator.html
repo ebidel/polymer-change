@@ -1,0 +1,38 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="../bower_components/google-map/google-map.html">
+<link rel="import" href="../bower_components/geo-location/geo-location.html">
+<link rel="import" href="../bower_components/paper-slider/paper-slider.html">
+
+<polymer-element name="map-locator">
+  <template>
+    <style>
+      :host {
+        display: block;
+        height: 400px;
+        width: 400px;
+        position: relative;
+      }
+      google-map {
+        display: block;
+        height: 100%;
+        width: 100%;
+      }
+      paper-slider {
+        position: absolute;
+        z-index: 100;
+        bottom: 20px;
+        left: 20px;
+      }
+    </style>
+    <geo-location latitude="{{lat}}" longitude="{{long}}" watchpos></geo-location>
+    <google-map latitude="{{lat}}" longitude="{{long}}" zoom="{{zoom}}" disableDefaultUI>
+      <google-map-marker latitude="{{lat}}" longitude="{{long}}"></google-map-marker>
+    </google-map>
+    <paper-slider min="0" max="21" value="{{zoom}}" pin></paper-slider>
+  </template>
+  <script>
+    Polymer({
+      zoom: 14
+    });
+  </script>
+</polymer-element>

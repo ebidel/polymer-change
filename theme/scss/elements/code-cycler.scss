@@ -1,0 +1,89 @@
+@import "compass/css3/transition";
+@import "compass/css3/user-interface";
+
+@import "variables";
+// @import "mixins";
+// @import "animations";
+
+@import "codeblocks";
+
+:host {
+  display: block;
+  height: 100%;
+  width: 100%;
+}
+
+:host(.larger) pre {
+  @extend .larger;
+}
+
+pre {
+  cursor: pointer;
+  font-size: inherit;
+  line-height: inherit;
+  margin: 0;
+  text-align: left;
+  height: 100%;
+  width: 100%;
+
+  &[data-lang]::after {
+    content: attr(data-lang);
+    border-top-right-radius: inherit;
+    border-bottom-left-radius: inherit;
+    background-color: $gray-2;
+    opacity: 0.5;
+    right: 0;
+    top: 0;
+    position: absolute;
+    font-size: 16pt;
+    color: white;
+    padding: 2px 25px;
+    text-transform: uppercase;
+  }
+
+  &.helptext {
+    &:hover::before {
+      opacity: 1;
+    }
+
+    &::before {
+      content: 'click to cycle';
+      color: $gray-3;
+      background: url("../../../images/icons/arrow_curve_blue.svg") no-repeat 50% 50%;
+      position: absolute;
+      right: 75px;
+      bottom: -35px;
+      background-size: contain;
+      height: 50px;
+      width: 50px;
+      font-size: 20px;
+      padding-left: 60px;
+      font-family: 'Open Sans', Arial, sans-serif;
+      letter-spacing: initial;
+      letter-spacing: -moz-initial;
+      @include transition(opacity 300ms ease-in);
+      opacity: 0;
+      @include user-select(none);
+      z-index: 100;
+    }
+  }
+}
+
+#paginator {
+  text-align: center;
+}
+
+.circle {
+  $size: 10px;
+  cursor: pointer;
+  display: inline-block;
+  border-radius: 50%;
+  width: $size;
+  height: $size;
+  border: 1px solid $gray-1;
+  @include transition(background-color 200ms ease-in-out);
+
+  &.active {
+    background-color: $gray-1 !important;
+  }
+}

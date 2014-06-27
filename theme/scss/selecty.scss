@@ -1,0 +1,123 @@
+@import "variables";
+@import "mixins";
+@import "animations";
+
+.selecty {
+  position: absolute;
+  z-index: 100;
+  bottom: 0;
+  right: 0;
+  @include align-self(flex-end);
+  // margin-right: 40px;
+  margin-bottom: $slide-top-bottom-padding * 3;
+  margin-right: $slide-left-right-padding * 2;
+
+  width: 100%;
+
+  // http://nicolasgallagher.com/pure-css-speech-bubbles/demo/default.css
+  $speech-bubble-border-color: #222;
+  $speech-bubble-border-width: 2px;
+  $speech-bubble-bg-color: rgb(255,255,204);
+
+  .rectangle-speech-border {
+    // position: relative;
+    border: $speech-bubble-border-width solid $speech-bubble-border-color;
+    border-radius: 20px;
+
+    &:before, &:after {
+      display: block;
+      content: "";
+      position: absolute;
+      z-index: 10;
+      bottom: -34px;
+      right: 60px;
+      height: 30px;
+      border-color: $speech-bubble-border-color;
+      border-style: solid;
+      background: transparent;
+      margin: 0;
+    }
+
+    &:before {
+      width: 50px;
+      // border-width: 0 $speech-bubble-border-width $speech-bubble-border-width 0;
+      border-width: 0 0 $speech-bubble-border-width $speech-bubble-border-width;
+    
+      // border-bottom-right-radius: 80px 50px;
+      border-bottom-left-radius: 80px 50px;
+      background: $speech-bubble-bg-color;
+    }
+
+    &:after {
+      width: 20px;
+      // border-width: 0 $speech-bubble-border-width $speech-bubble-border-width 0;
+      border-width: 0 0 $speech-bubble-border-width $speech-bubble-border-width;
+      // border-bottom-right-radius: 40px 50px;
+      border-bottom-left-radius: 40px 50px;
+      background: white;
+    }
+
+    > :first-child {
+      margin: 0;
+
+      // &:before {
+      //   content: "";
+      //   position: absolute;
+      //   bottom: -35px;
+      //   right: 58px;
+      //   width: 3px;
+      //   height: 3px;
+      //   background: $speech-bubble-border-color;
+      //   border-radius: $speech-bubble-border-width;
+      // }
+      &:after {
+        content: "";
+        position: absolute;
+        bottom: -10px;
+        right: 82px;
+        width: 28px;
+        height: 15px;
+        background: $speech-bubble-bg-color;
+      }
+    }
+  }
+
+  q {
+    background-color: $speech-bubble-bg-color;
+    padding: 20px;
+    border-radius: 5px;
+    border: 2px solid #222;
+    display: inline-block;
+    //margin-left: 15px;
+    font-family: 'Architects Daughter', cursive;
+    font-size: 20px;
+    line-height: 30px;
+    max-width: 50%;
+    position: relative;
+
+    bottom: 0;
+    position: absolute;
+    right: 0;
+
+    opacity: 0;
+    @include transition(opacity 600ms ease-in-out);
+  }
+
+  img {
+    // &:hover {
+    //   -webkit-animation: none;
+    //   + q {
+    //     opacity: 1;
+    //   }
+    // }
+    + q {
+      opacity: 1;
+    }
+    height: 75px;
+    position: absolute;
+    bottom: -80px;
+    right: -80px;
+    @extend .jitter;
+    // -webkit-animation-duration: 5s;
+  }
+}

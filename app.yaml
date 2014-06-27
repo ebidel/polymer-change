@@ -1,0 +1,39 @@
+application: polymer-change
+version: 1
+runtime: python27
+api_version: 1
+threadsafe: yes
+
+handlers:
+
+- url: /js
+  static_dir: js
+
+- url: /images
+  static_dir: images
+
+- url: /audio
+  static_dir: audio
+
+- url: /videos
+  static_dir: videos
+
+- url: /demos
+  static_dir: demos
+
+- url: /theme
+  static_dir: theme
+
+- url: /slide_config\.js
+  static_files: slide_config.js
+  upload: slide_config\.js
+
+- url: /bower_components
+  static_dir: bower_components
+
+- url: /elements
+  static_dir: elements
+
+- url: /
+  static_files: index.html
+  upload: index\.html

@@ -1,0 +1,165 @@
+<!--
+Copyright Eric Bidelman <ebidel@gmail.com> 2014
+
+Adapted from Google IO 2012 HTML5 Slide Template
+https://code.google.com/p/io-2012-slides
+-->
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Polymer!</title>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <link rel="stylesheet" media="all" href="theme/css/default.css">
+  <link rel="stylesheet" media="all" href="theme/css/app.css">
+  <link rel="stylesheet" media="all" href="theme/css/polymer.css">
+  
+  <link rel="stylesheet" media="all" href="theme/css/io2014.css">
+  <link rel="stylesheet" media="all" href="theme/css/slides.css">
+
+  <link rel="stylesheet" media="only screen and (max-device-width: 480px)" href="theme/css/phone.css">
+
+  <base target="_blank"> <!-- This amazingness opens all links in a new tab. -->
+
+  <script src="bower_components/platform/platform.js"></script>
+  <script data-main="js/slides" src="js/require-1.0.8.min.js"></script>
+  <link rel="import" href="elements/elements.html">
+</head>
+<body>
+
+<!-- <div class="sidebar left core core-bg"></div>
+<div class="sidebar right core core-bg"></div>
+
+<div class="sidebar right elements elements-bg"></div>
+<div class="sidebar left elements elements-bg"></div>
+
+<div class="sidebar left platform platform-bg"></div>
+<div class="sidebar right platform platform-bg"></div> -->
+
+
+<main role="main"> 
+
+<slides class="layout-widescreen">
+
+<slide class="iologo nobackground">
+  <article class="flexbox vcenter">
+    <span><img src="images/io2014_logo.png"></span>
+  </article>
+</slide>
+
+<!-- <slide id="first-slide" class="nobackground"></slide> -->
+
+<slide id="title-slide" class="nobackground do-transition" data-body-class="field">
+  <article class="auto-fadein flexbox vcenter">
+    <div><hgroup>
+      <h1 data-config-title><!-- populated from slide_config.json --></h1>
+      <h2 data-config-subtitle><!-- populated from slide_config.json --></h2>
+    </hgroup>
+    <p data-config-presenter><!-- populated from slide_config.json --></p></div>
+  </article>
+  <!-- <video data-src="videos/universe.webm" class="fullviewport"></video> -->
+  <!-- <audio data-src="audio/Stellardrone-Introspace.mp3" loop></audio> -->
+</slide>
+
+
+{% for slide in slides %}
+<slide {% if slide.id %}id="{{- slide.id -}}"{% endif %} {% if slide.class %}class="{{- slide.class -}}"{% endif %} {% if slide.image %}style="background-image: url({{- slide.image -}})"{% endif %} {% if slide.body_class %}data-body-class="{{- slide.body_class -}}"{% endif %} {% if slide.hidden == 'true' %}hidden{% endif %}>
+  {% if 'segue' in slide.class %}
+    <!-- <aside class="gdbar"><img src="images/logos/chrome_logo.png"></aside> -->
+    <hgroup class="auto-fadein">
+      <h2>{{- slide.title -}}</h2>
+      <h3>{{- slide.subtitle -}}</h3>
+    </hgroup>
+    {% if slide.keep_content %}
+    <article {% if slide.content_class %}class="{{- slide.content_class -}}"{% endif %}>
+      {{- slide.content -}}
+    </article>
+    {% endif %}
+  {% else %}
+    <hgroup>
+      <span>
+        {% if slide.bug_link %}
+          <a href="{{- slide.bug_link -}}" target="_blank" class="bug" title="Bug link"></a>
+        {% endif %}
+        {% if slide.spec_link %}
+          <a href="{{- slide.spec_link -}}" target="_blank" class="spec" title="Spec link"></a>
+        {% endif %}
+        {% if slide.h5r_link %}
+          <a href="{{- slide.h5r_link -}}" target="_blank" class="h5r" title="HTML5Rocks article"></a>
+        {% endif %}
+        {% if slide.polymer_link %}
+          <a href="{{- slide.polymer_link -}}" target="_blank" class="polymer_link" title="Polymer docs link"></a>
+        {% endif %}
+      </span>
+      <h2>{{- slide.title -}}</h2>
+      <h3>{{- slide.subtitle -}}</h3>
+    </hgroup>
+    <article {% if slide.content_class %}class="{{- slide.content_class -}}"{% endif %}>
+    {{- slide.content -}}
+    </article>
+ {% endif %}
+</slide>
+{% endfor %}
+
+<slide class="thank-you-slide segue nobackground large" data-body-class="googleblue">
+  <!-- <aside class="gdbar right"><img src="images/logos/chrome_logo.png"></aside> -->
+  <article class="flexbox vleft auto-fadein">
+    <div horizontal layout style="width:100%;margin-bottom:100px;">
+      <div flex three>
+        <h3 style="margin-bottom:20px;">&lt;thank-you></h3>
+        <p><!-- <span>slides:</span> --><a href="http://polymer-change.appspot.com/">polymer-change.appspot.com</a></p>
+        <!-- <p><span>github:</span><a href="http://github.com/ebidel/polymer-change">github.com/ebidel/polymer-change</a></p> -->
+      </div>
+      <div flex>
+        <p>Give feedback!</p>
+        <img src="http://chart.googleapis.com/chart?cht=qr&chs=200x200&choe=UTF-8&chld=H|0&chl=http://goo.gl/4Hlhpo">
+        <p><a href="http://goo.gl/4Hlhpo">goo.gl/4Hlhpo</a></p>
+      </div>
+    </div>
+  </article>
+  <p class="auto-fadein" data-config-contact></p>
+</slide>
+
+
+<!-- <slide id="finito" class="segue nobackground">
+  <article class="flexbox vcenter auto-fadein">
+    <h2>Finito.</h2>
+  </article>
+</slide> -->
+
+
+<slide class="iologo nobackground" data-body-class="googlegray">
+  <article class="flexbox vcenter">
+    <span><img src="images/io2014_logo.png"></span>
+  </article>
+</slide>
+
+
+<slide class="backdrop"></slide>
+
+</slides>
+
+</main>
+
+<!-- <video src="videos/universe.webm" class="fullviewport" style="width:auto !important;"></video>
+<audio src="audio/Stellardrone-Introspace.mp3" loop></audio>
+ -->
+ 
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-51948107-1', 'polymer-change.appspot.com');
+  ga('send', 'pageview');
+</script>
+
+<!--[if IE]>
+  <script src="http://ajax.googleapis.com/ajax/libs/chrome-frame/1/CFInstall.min.js"></script>
+  <script>CFInstall.check({mode: 'overlay'});</script>
+<![endif]-->
+</body>
+</html>

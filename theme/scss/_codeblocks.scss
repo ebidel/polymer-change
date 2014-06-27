@@ -1,0 +1,81 @@
+@import "compass/css3/box-sizing";
+
+@import "variables";
+// @import "mixins";
+
+@import "prettyprint";
+
+pre {
+  //font-family: 'Source Code Pro', Monaco, Menlo, Consolas, 'Courier New', monospace;
+  font-family: 'Inconsolata';
+  font-size: 20px;
+  font-weight: normal;
+  line-height: 28px;
+  padding: 10px 0 10px $slide-left-right-padding;
+  letter-spacing: -1px;
+  margin-bottom: 20px;
+  background-color: $gray-1;
+  position: relative;
+  @include box-sizing(border-box);
+  /*overflow: hidden;*/
+
+  left: initial;
+  width: initial;
+
+  padding: 16px;
+  border-radius: 5px;
+
+  // Put back and remove from default.scss https://github.com/Polymer/platform/issues/57 is fixed.
+  // &[data-lang]::after {
+  //   content: attr(data-lang);
+  //   border-top-right-radius: inherit;
+  //   border-bottom-left-radius: inherit;
+  //   background-color: $gray-2;
+  //   right: 0;
+  //   top: 0;
+  //   position: absolute;
+  //   font-size: 16pt;
+  //   color: white;
+  //   padding: 2px 25px;
+  //   text-transform: uppercase;
+  // }
+
+  &.larger {
+    font-size: 30px;
+    line-height: 1.4;
+  }
+
+  &.nohighlight {
+    //font-family: 'Source Code Pro', 'Courier New', monospace;
+    font-family: 'Inconsolata';
+    //font-size: 20px;
+    line-height: 1.2;
+    background: transparent;
+    margin-bottom: 0;
+  }
+
+  &.corner {
+    position: absolute;
+    right: 0;
+    top: 0;
+    font-size: 16px;
+    line-height: 1.5;
+    margin: 0 40px;
+
+    [data-tooltip]:hover {
+      &:after {
+        left: -150px;
+      }
+    }
+  }
+
+  [data-action] {
+    border-bottom: 1px dotted black;
+    display: inline-block;
+    cursor: pointer;
+    //@include user-select(none);
+    .inactive {
+      opacity: 0.5;
+    }
+  }
+}

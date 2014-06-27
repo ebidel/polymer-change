@@ -1,0 +1,26 @@
+{
+  "name": "io2014-polymer-changer",
+  "version": "0.0.1",
+  "authors": [
+    "Eric Bidelman <e.bidelman@google.com>"
+  ],
+  "private": true,
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "core-elements": "Polymer/core-elements#master",
+    "core-animated-pages": "Polymer/core-animated-pages#master",
+    "core-style": "Polymer/core-style#master",
+    "paper-elements": "Polymer/paper-elements#master",
+    "google-map": "PolymerLabs/google-map#master",
+    "geo-location": "ebidel/geo-location#master",
+    "google-sheets": "GoogleWebComponents/google-sheets#master",
+    "flatiron-director": "PolymerLabs/flatiron-director#master"
+  }
+}

@@ -1,0 +1,60 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+
+<polymer-element name="device-preview" attributes="src">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+      :host([type="n5"]) img {
+        width: 360px;
+      }
+      :host([type="n5"]) iframe {
+        width: 276px;
+        height: 488px;
+        left: 41px;
+        top: 50px;
+      }
+      :host([type="pixel"]) img {
+        width: 800px;
+      }
+      :host([type="pixel"]) iframe {
+        width: 559px;
+        height: 371px;
+        left: 112px;
+        top: 35px;
+      }
+      img {
+        z-index: 10;
+        pointer-events: none;
+        position: relative;
+      }
+      iframe {
+        position: absolute;
+        border: none;
+      }
+    </style>
+    <div style="position:relative">
+      <template if="{{type == 'n5'}}">
+        <img src="/images/screenshots/nexus5.png">
+      </template>
+      <template if="{{type == 'pixel'}}">
+        <img src="/images/screenshots/pixel.png">
+      </template>
+      <iframe src="{{src}}"></iframe>
+    </div>
+  </template>
+  <script>
+    Polymer('device-preview', {
+      publish: {
+        type: {value: 'n5', reflect: true}
+      },
+      ready: function() {
+
+      },
+      typeChanged: function() {
+
+      }
+    });
+  </script>
+</polymer-element>

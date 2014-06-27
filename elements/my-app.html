@@ -1,0 +1,41 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+
+
+<polymer-element name="my-app">
+  <template>
+    <style>
+    div {
+
+    }
+    </style>
+    <content select="core-toolbar"></content>
+    <div id="container"><content></content></div>
+  </template>
+  <script>
+    (function() {
+
+      Polymer('my-app', {
+        ready: function() {
+          var i = 0;
+
+//this.$.container.hidden = false;
+
+delay(2000);
+
+        }
+      });
+
+    })();
+  </script>
+</polymer-element>
+
+<script>
+function delay(milliseconds) {
+  var start = window.performance.now();
+  var end = window.performance.now();
+  while(end - start < milliseconds) {
+    end = window.performance.now();
+  }
+  return end - start;
+}
+</script>

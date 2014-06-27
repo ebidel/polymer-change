@@ -1,0 +1,194 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/core-selector/core-selector.html">
+
+<!--
+- Leading and trailing whitespace is stripped.
+- Accepts a textarea or template. Benefit of template is that you can highlight
+  sections of code. See example below.
+
+  Example: Basic example. Displays the second item first.
+
+    <code-cycler selected="1">
+      <template>
+        <polymer-element name="my-el" noscript>
+          ...
+        </polymer-element>
+      </template>
+      <template>
+        <polymer-element name="my-el" noscript>
+          <span>something new</span>
+        </polymer-element>
+      </template>
+    </code-cycler>
+
+  Example: The `escaped` attribute assumes the content is escaped and allows
+           you to callout sections of code using <b>, etc.
+  
+    <code-cycler>
+      <template escaped>
+        &lt;polymer-element name="my-input" <b>noscript</b>>
+      </template>
+    ...
+
+  Example: Any stylings on the template is applied to the content.
+  
+    <code-cycler>
+      <template style="font-size:40px">
+        blah blah
+      </template>
+    ...
+
+  Example: prettyprint code (requires prettify.js):
+
+    <code-cycler class="prettyprint">...</code-cycler>
+
+  Example: show snippet number (top right corner) and tooltip on hover
+           (bottom right):
+
+    <code-cycler shownumbers showhelp>...</code-cycler>
+
+  Example: show code language (top right corner):
+
+    <code-cycler language="HTML">...</code-cycler>
+
+@element core-selector
+@blurb Cycles through code snippets
+@status alpha
+@extends core-selector
+-->
+<polymer-element name="code-cycler" extends="core-selector" attributes="language showNumbers showHelp noCircles">
+  <template>
+    <link rel="stylesheet" href="../theme/css/elements/code-cycler.css">
+    <pre id="code" class="prettyprint {{ {helptext: showHelp} | tokenList }}" on-click="{{onPreClick}}"></pre>
+    <div id="paginator" hidden?="{{showNumbers || noCircles}}">
+      <template repeat="{{block,i in codeblocks}}">
+        <span class="circle {{ {active: i == selected} | tokenList }}" on-click="{{selectSnippet}}"></span>
+      </template>
+    </div>
+    <div hidden>
+      <content id="content" select="template,textarea"></content>
+    </div>
+  </template>
+  <script>
+  (function() {
+    function encodeHTMLEntities_(htmlStr) {
+      return htmlStr.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+                     //replace(/\{/g,'&#123;').replace(/\}/g,'&#125;');
+    }
+  
+    Polymer('code-cycler', {
+      // Displays the language of the code snippets in the top right corner.
+      // If showNumbers is true, it trumps this property.
+      language: '',
+      selected: 0,
+      showNumbers: false, // Shows x/y snippet in the top right corner.
+      showHelp: false, // Displays "click to cycle" when the user hovers over.
+      noCircles: false,
+      created: function() {
+        this.codeblocks = [];
+        this.cache = []; // Cache processing/pretty-printing of each snippet.
+
+        this.super();
+      },
+      attached: function() {
+        this.codeblocks = Array.prototype.slice.call(
+              this.$.content.getDistributedNodes());
+
+        this.$.code.classList.toggle('nohighlight', this.classList.contains('nohighlight'));
+
+        this.injectSelectedCodeSnippet();
+      },
+      onPreClick: function(e, detail, sender) {
+        e.stopPropagation();
+
+        if (!e.metaKey) {
+          this.cycleToNextCodeSnippet(e.shiftKey);
+        }
+      },
+      selectSnippet: function(e, detail, sender) {
+        e.stopPropagation();
+
+        this.cycleToNextCodeSnippet(false, e.target.templateInstance.model.i);
+      },
+      cycleToNextCodeSnippet: function(backwards, opt_Index) {
+        // If index is given, select that codeblock. Otherwise, select the
+        // next/previous.
+        if (opt_Index != undefined) {
+          this.selected = opt_Index;
+        } else {
+          this.selected += (backwards ? -1 : 1);
+          this.selected %= this.codeblocks.length;
+          if (this.selected < 0) {
+            this.selected = this.codeblocks.length - 1;
+          }
+        }
+      },
+      injectSelectedCodeSnippet: function() {
+        var el = this.codeblocks[this.selected];
+
+        var snippet = this.cache[this.selected];
+        if (!snippet) {
+          var isEscaped = el.hasAttribute('escaped');
+
+          if (isEscaped) {
+            sourceHTML = el.innerHTML;
+          } else if ('value' in el) {
+            sourceHTML = encodeHTMLEntities_(el.value);
+          } else {
+            sourceHTML = encodeHTMLEntities_(el.innerHTML);
+          }
+
+          // var sourceHTML = isEscaped ? el.innerHTML :
+          //                              encodeHTMLEntities_(el.innerHTML);
+
+          // Strip leading whitespace from each line, preserving newlines.
+          var result = /^( +)\s/m.exec(sourceHTML);
+          if (result) {
+            var lines = sourceHTML.split('\n');
+
+            // Removing leading whitespace from the line.
+            for (var i = 0; i < lines.length; ++i) {
+              lines[i] = lines[i].substr(result[0].length);
+            }
+
+            sourceHTML = lines.join('\n');
+          }
+
+          // Prettyprint if element has class="prettyprint".
+          if (window.prettyPrintOne && this.classList.contains('prettyprint')) {
+            snippet = window.prettyPrintOne(sourceHTML);
+          } else {
+            snippet = sourceHTML;
+          }
+
+          this.cache[this.selected] = snippet; // Cache it for later cycling.
+        }
+
+        // Apply styles on the template, then set the code snippet.
+        var hasStyles = el.getAttribute('style');
+        this.$.code.setAttribute('style', hasStyles ? hasStyles : '');
+
+        this.$.code.innerHTML = snippet;
+
+        if (this.showNumbers) {
+          this.$.code.dataset.lang = (this.selected + 1) + '/' +
+                                     this.codeblocks.length;
+        }
+      },
+      languageChanged: function() {
+        if (this.language && !this.showNumbers) {
+          this.$.code.dataset.lang = this.language;
+        } else if (!this.showNumbers) {
+          delete this.$.code.dataset['lang'];
+        }
+      },
+      selectedChanged: function() {
+        this.injectSelectedCodeSnippet();
+        //el.classList.add('core-selected');
+        this.fire('code-snippet-change', {index: this.selected});
+      }
+    });
+
+  })();
+  </script>
+</polymer-element>

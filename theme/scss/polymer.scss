@@ -1,0 +1,465 @@
+@import "compass/css3/border-radius";
+@import "compass/css3/box-shadow";
+@import "compass/css3/images";
+//@import "compass/css3/shared";
+@import "compass/css3/transform";
+@import "compass/css3/transition";
+
+@import "variables";
+@import "mixins";
+@import "animations";
+
+/* Architecture stack */
+.core {
+  color: $polymer-core-color;
+}
+.core-bg {
+  background-color: $polymer-core-color;
+}
+.core-fill {
+  @extend .fill;
+  background: $polymer-core-color;
+}
+.platform {
+  color: $polymer-platform-color;
+}
+.platform-bg {
+  background-color: $polymer-platform-color;
+}
+.platform-fill {
+  @extend .fill;
+  background: $polymer-platform-color;
+}
+.elements {
+  color: $polymer-elements-color;
+}
+.elements-bg {
+  background-color: $polymer-elements-color;
+}
+.elements-fill {
+  @extend .fill;
+  background: $polymer-elements-color;
+}
+.applications {
+  color: $polymer-applications-color;
+}
+.applications-bg {
+  background-color: rgba(67, 135, 253, 1);
+}
+.applications-fill {
+  @extend .fill;
+  background: $polymer-applications-color;
+}
+
+.fill {
+  .faded {
+    color: rgba(255, 255, 255, 0.6);
+  }
+
+  h2 {
+    color: rgba(255, 255, 255, 1);
+    line-height: 1.25;
+
+    em {
+      font-style: normal;
+      color: rgba(255, 255, 255, 1);
+    }
+  }
+}
+// -----
+
+// Left sidebar architecture color bars
+.platform-bg {
+  .sidebar.platform {
+    width: 25px;
+    &::after {
+      content: 'platform';
+    }
+  }
+}
+.core-bg {
+  .sidebar.core {
+    width: 25px;
+    &::after {
+      content: 'core';
+    }
+  }
+}
+.elements-bg {
+  .sidebar.elements {
+    width: 25px;
+    &::after {
+      content: 'elements';
+    }
+  }
+}
+
+.sidebar {
+  overflow: hidden;
+  font-family: 'Open Sans', Arial, sans-serif;
+  font-size: 35px;
+  position: absolute;
+  height: 100%;
+  left: 0;
+  width: 0;
+  color: white;
+  @include transition(all 400ms ease-in-out);
+  // @include transition(all 400ms cubic-bezier(.17,1.67,0,1.33));
+
+  &::after {
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
+    font-family: FontAwesome;
+    position: absolute;
+    bottom: -10px;
+    left: 5px;
+    @include transform(rotateZ(-90deg));
+    -webkit-transform-origin: 0 0;
+    -moz-transform-origin: 0 0;
+    transform-origin: 0 0;
+  }
+
+  &.left {
+    @include box-shadow(-3px 0 10px rgba(0, 0, 0, 0.3) inset);
+  }
+  &.right {
+    @include box-shadow(3px 0 10px rgba(0, 0, 0, 0.3) inset);
+    right: 0;
+    left: initial;
+    left: -moz-initial;
+
+    &::after {
+      @include transform(rotateZ(90deg));
+      -webkit-transform-origin: 0 50%;
+      -moz-transform-origin: 0 50%;
+      transform-origin: 0 50%;
+      bottom: initial;
+    }
+  }
+}
+
+// slide.current {
+//   code-cycler pre::before { // polyfill
+//     opacity: 1;
+//   }
+//   code-cycler /shadow/ pre::before { // native
+//     opacity: 1;
+//   }
+// }
+
+.nohighlight::shadow {
+  background-color: transparent;
+}
+
+// pre {
+//   &.nohighlight {
+//     font-family: 'Source Code Pro', 'Courier New', monospace;
+//     //font-size: 20px;
+//     line-height: 1.2;
+//     background: transparent;
+//     margin-bottom: 0;
+//   }
+
+//   &.corner {
+//     position: absolute;
+//     right: 0;
+//     top: 0;
+//     font-size: 16px;
+//     line-height: 1.5;
+//     margin: 0 40px;
+
+//     [data-tooltip]:hover {
+//       &:after {
+//         left: -150px;
+//       }
+//     }
+//   }
+
+//   [data-action] {
+//     border-bottom: 1px dotted black;
+//     display: inline-block;
+//     cursor: pointer;
+//     //@include user-select(none);
+//     .inactive {
+//       opacity: 0.5;
+//     }
+//   }
+// }
+
+// label.spec {
+//   background-image: none !important;
+//   font-size: 60%;
+//   display: initial !important;
+//   vertical-align: top;
+//   margin-left: 25px;
+//   opacity: 1 !important;
+//   @include transition(none !important);
+//   // background: $polymer-platform-color;
+//   // padding: 3px 10px;
+//   // border-radius: 5px;
+//   // color: white;
+//   color: $gray-2;
+//   letter-spacing: initial;
+//   // font-weight: initial;
+// }
+
+
+// Slide styles
+slides > slide {
+  @include border-radius(0);
+  //border-bottom: 5px solid transparent;
+
+  $slide-left-right-padding: 40px;
+  padding: 0 $slide-left-right-padding;
+
+  &.backdrop {
+    display: none !important;
+  }
+
+  &:not(.nobackground) {
+
+    &::before, &::after {
+      bottom: 0;
+      left: initial;
+    }
+    &::before {
+      background: url(../../images/polymer/p-logo-square.png) no-repeat 0 50%;
+      padding: 0 $slide-left-right-padding;
+      background-size: $brand-small-icon-size $brand-small-icon-size;
+    }
+  }
+
+  // &.segue {
+  //   &.elements, &.core, &.platform {
+  //     padding-left: 40px;
+  //     padding-right: 40px;
+
+  //     footer {
+  //       display: none;
+  //     }
+
+  //   }
+
+  //   h3 {
+  //     font-size: 20px;
+  //     position: absolute;
+  //     .nounderline {
+  //       border: none;
+  //       color: $gray-2;
+  //     }
+  //   }
+  // }
+
+  // &:not(.segue):not(.nobackground)  {
+  //   &.elements, &.platform, &.core {
+  //     &::before {
+  //       text-align: center;
+  //     }
+  //     footer {
+  //       line-height: 1.9;
+  //       font-size: 12pt;
+  //       position: absolute;
+  //       bottom: 0;
+  //       left: 10px;
+  //       [class*="icon-"]::after {
+  //         margin-left: 5px;
+  //       }
+  //     }
+  //   }
+
+  //   &.elements {
+  //     border-color: $polymer-elements-color;
+  //     footer {
+  //       [class*="icon-"] {
+  //         &::after {
+  //           content: 'elements';
+  //         }
+  //       }
+  //     }
+  //   }
+  //   &.platform {
+  //     border-color: $polymer-platform-color;
+  //     footer {
+  //       [class*="icon-"] {
+  //         &::after {
+  //           content: 'platform';
+  //         }
+  //       }
+  //     }
+  //   }
+  //   &.core {
+  //     border-color: $polymer-core-color;
+  //     footer {
+  //       [class*="icon-"] {
+  //         &::after {
+  //           content: 'core';
+  //         }
+  //       }
+  //     }
+  //   }
+  // }
+
+
+  // &.elements, &.core, &.platform {
+  //   color: inherit;
+
+  //   &.current {
+  //     article {
+  //       opacity: 1;
+  //     }
+  //   }
+  // }
+
+  // &.current {
+
+  //   &.elements {
+  //     .overlay {
+  //       &.top {
+  //         height: 0; 
+  //       }
+  //       &.bottom {
+  //         height: 283px;
+  //       }
+  //     }
+  //   }
+
+  //   &.core {
+  //     .overlay {
+  //       &.top {
+  //         height: 298px; 
+  //       }
+  //       &.bottom {
+  //         height: 247px;
+  //       }
+  //     }
+  //   }
+
+  //   &.platform {
+  //     .overlay {
+  //       &.top {
+  //         height: 333px; 
+  //       }
+  //       &.bottom {
+  //         height: 0;
+  //       }
+  //     }
+  //   }
+
+  // }
+
+}
+
+// Position element in corners.
+.corner {
+  position: absolute;
+
+  &.top {
+    top: 0;
+  }
+  &.bottom {
+    bottom: $slide-left-right-padding / 2;
+  }
+  &.left {
+    left: 0;
+  }
+  &.right {
+    right: 0;
+  }
+}
+
+// .paper-button {
+//   display: inline-block;
+//   -webkit-transition: box-shadow 0.2s, background 0.2s;
+//   transition: box-shadow 0.2s, background 0.2s;
+//   border: none;
+//   cursor: pointer;
+//   overflow: hidden;
+//   position: relative;
+//   // color: rgb(102, 102, 102);
+//   padding: 14px 14px 12px;
+//   border-top-left-radius: 2px;
+//   border-top-right-radius: 2px;
+//   border-bottom-right-radius: 2px;
+//   border-bottom-left-radius: 2px;
+//   outline: none;
+//   white-space: nowrap;
+//   font-size: 13px;
+//   line-height: 24px;
+//   letter-spacing: 0.06em;
+//   color: inherit;
+//   vertical-align: middle;
+//   font-weight: normal;
+
+//   text-transform: uppercase;
+
+//   polymer-ui-icon {
+//     margin-right: 5px;
+//   }
+
+//   &[borderless] {
+//     border: none;
+//     background: none;
+//   }
+
+//   &:not([borderless]) {
+//     background: #fafafa;
+//     box-shadow: rgba(0, 0, 0, 0.14902) 0px 1px 1px 0px, rgba(0, 0, 0, 0.0980392) 0px 1px 2px 0px;
+//   }
+
+//   &:hover, &.active {
+//     text-decoration: none;
+//     background: #fff;
+//     box-shadow: 0px 4px 10px 0 rgba(0,0,0,0.1), 0px 2px 10px 0px rgba(0,0,0,0.1);
+//   }
+
+//   // Inset highlight
+//   &[sink] {
+//     padding: 7px 10px;
+//     transition: none;
+
+//     &:hover, &.active {
+//       @include background(linear-gradient(top, rgba(0, 0, 0, 0) 5%, rgba(0, 0, 0, 0.08) 40%));
+//       box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2) inset, 0 -1px 1px rgba(0, 0, 0, 0.1) inset, 0 1px 0px rgba(0, 0, 0, 0.2) inset;
+//     }
+//   }
+// }
+
+// label {
+//   &.color {
+//     padding: 5px 10px;
+//     border-radius: 10px;
+//     color: white;
+//     margin-right: 10px;
+//     //@include text-shadow(none);
+//     vertical-align: middle;
+//     font-weight: bold;
+//     // font-family: "Open Sans", sans-serif;
+//     letter-spacing: 0;
+
+//     &:after {
+//       //text-transform: capitalize;
+//       text-transform: uppercase;
+//     }
+//   }
+//   &.bad {
+//     background-color: $brand-red;
+//     &:after {
+//       content: 'Old way';
+//     }
+//   }
+//   // &.new {
+//   //   background-color: orange;
+//   //   //color: $gray-4;
+//   //   &:after {
+//   //     content: 'New way';
+//   //   }
+//   // }
+//   // &.donttouchjs {
+//   //   background-color: purple;
+//   //   &:after {
+//   //     content: 'No JS';
+//   //   }
+//   // }
+//   &.good {
+//     background-color: $brand-green;
+//   }
+// }

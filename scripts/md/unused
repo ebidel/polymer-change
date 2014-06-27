@@ -1,0 +1,693 @@
+---
+
+hidden: true
+hidden_new: true
+body_class: googlecomhistory
+class: nobackground fullviewport googlecomtoday
+
+---
+
+hidden: true
+hidden_new: true
+body_class: googlecomhistory
+class: nobackground fullviewport googlecomyesterday do-transition
+
+---
+
+hidden: true
+hidden_new: true
+id: netscape
+#title: Understand where we came from
+class: nobackground
+#image: images/bgs/netscape_blank.png
+content_class: flexbox vcenter
+body_class: netscape
+
+<template id="formexample" style="display: none">
+  <style>body{margin:0;padding:0;}</style>
+  <form>
+    <table class="build" border="10" cellpadding="5" cellspacing="5">
+    <tr><td><label>First name:</td><td><input type="name"></td></tr>
+    <tr><td><label>Last name</td><td><input type="name"></label></td></tr>
+    <tr><td>T-shirt size</td><td>
+      <select>
+        <option>Small</option>
+        <option selected>Medium</option>
+        <option>Large</option>
+        <option>X-large</option>
+      </select>
+    </td></tr>
+    <tr><td><label>Gender</label></td><td>Male: <input type="radio"  name="gender"> Female: <input type="radio" name="gender"></td></tr>
+    <tr><td colspan="2"><input type="submit"></td></tr>
+    </table>
+  </form>
+</template>
+
+<iframe id="formframe" style="width:300px;border:none;height:250px;margin-top:6em;"></iframe>
+
+<div class="build">
+  <selecty-element>
+    It looks like you're building a web page on the internet!
+  </selecty-element>
+</div>
+
+---
+
+hidden: true
+hidden_new: true
+body_class: elements-fill
+class: nobackground
+content_class: flexbox vcenter
+
+<h2 class="faded">Elements are <em>declarative</em></h2>
+
+---
+
+hidden: true
+hidden_new: true
+class: large
+content_class: flexbox vcenter
+
+<pre class="nohighlight">
+&lt;select>
+  &lt;option>Small&lt;/option>
+  &lt;option>Medium&lt;/option>
+  &lt;option>Large&lt;/option>
+&lt;/select>
+</pre>
+
+<select class="corner top right">
+  <option>Small</option>
+  <option>Medium</option>
+  <option>Large</option>
+</select>
+
+<!-- <div class="selecty auto-fadein">
+  <span>
+    <img data-src="images/selecty.png">
+    <q class="rectangle-speech-border"><p>I give my children a default UI!</p></q>
+  </span>
+</div>
+ -->
+
+<selecty-element class="auto-fadein">I give my children a default UI!</selecty-element>
+
+---
+
+hidden: true
+hidden_new: true
+body_class: elements-fill
+class: nobackground
+content_class: flexbox vcenter
+
+<h2 class="faded">Elements are <em>configurable</em></h2>
+
+---
+
+hidden: true
+hidden_new: true
+class: large
+content_class: flexbox vcenter
+
+<pre class="nohighlight">
+&lt;select id="schwag">
+  ...
+  &lt;option <b>disabled</b>>Medium&lt;/option>
+  &lt;option <b>disabled</b>>Large&lt;/option>
+  &lt;option <b>selected</b>>XX-large&lt;/option>
+&lt;/select>
+</pre>
+
+<select id="schwag" class="corner top right">
+  <option disabled>Small</option>
+  <option disabled>Medium</option>
+  <option disabled>Large</option>
+  <option selected>XX-large</option>
+</select>
+
+<selecty-element class="auto-fadein">Elements are configured using attributes, not script.</selecty-element>
+
+---
+
+hidden: true
+hidden_new: true
+class: large
+content_class: flexbox vcenter
+
+<pre class="nohighlight" style="margin-left: -100px;">
+&lt;select <b>size="4"</b> <b>multiple</b>>
+  &lt;option>Do&lt;/option>
+  &lt;option>Re&lt;/option>
+  &lt;option>Mi&lt;/option>
+  ...
+&lt;/select>
+</pre>
+
+<select size="4" multiple class="corner top right">
+  <option>Do</option>
+  <option>Re</option>
+  <option>Mi</option>
+  <option>Fa</option>
+  <option>So</option>
+  <option>La</option>
+  <option>Ti</option>
+  <option>Do</option>
+</select>
+
+<selecty-element class="auto-fadein">Attributes change how users interact with me</selecty-element>
+
+---
+
+hidden: true
+hidden_new: true
+body_class: elements-fill
+class: nobackground
+content_class: flexbox vcenter
+
+<h2 class="faded">Elements are <em>composable</em></h2>
+
+---
+
+hidden: true
+hidden_new: true
+class: large
+content_class: flexbox vcenter
+
+<pre class="nohighlight">
+&lt;select>
+  &lt;optgroup label="German Cars">
+    &lt;option>Mercedes&lt;/option>
+    &lt;option>Audi&lt;/option>
+  &lt;/optgroup>
+  ...
+&lt;/select>
+</pre>
+
+<select class="corner top right">
+  <optgroup label="German Cars">
+    <option value="mercedes">Mercedes</option>
+    <option value="audi">Audi</option>
+  </optgroup>
+  <optgroup label="American cars">
+    <option value="ford">Ford</option>
+    <option value="gm">GM</option>
+  </optgroup>
+</select>
+
+<selecty-element class="auto-fadein">Attributes can effect my UI.</selecty-element>
+
+---
+
+hidden: true
+class: large
+content_class: flexbox vcenter
+
+<pre class="nohighlight">
+&lt;select>
+  &lt;option>Small&lt;/option>
+  <s>&lt;li>Medium&lt;/li></s>
+  &lt;option>Large&lt;/option>
+&lt;/select>
+</pre>
+
+<select class="corner top right">
+  <option>Small</option>
+  <li>Medium</li>
+  <option>Large</option>
+</select>
+
+<selecty-element class="auto-fadein">I'm picky! I only <s>allow</s> accept certain elements as children.</selecty-element>
+
+---
+
+hidden: true
+hidden_new: true
+class: large
+content_class: flexbox vcenter
+
+<pre class="nohighlight">
+<b>&lt;form></b>
+  &lt;select name="size">
+    &lt;option value="s">Small&lt;/option>
+    &lt;option value="m">Medium&lt;/option>
+    &lt;option value="l">Large&lt;/option>
+  &lt;/select>
+<b>&lt;/form></b>
+</pre>
+
+<selecty-element class="auto-fadein">In other contexts, I take on additional responsibilities.</selecty-element>
+
+---
+
+hidden: true
+class: large
+content_class: flexbox vcenter
+
+<pre class="nohighlight">
+&lt;input list="sizes">
+<b>&lt;datalist id="sizes"></b>
+  &lt;option value="s">Small&lt;/option>
+  &lt;option value="m">Medium&lt;/option>
+  &lt;option value="l">Large&lt;/option>
+<b>&lt;/datalist></b>
+</pre>
+
+<input list="sizes" class="example corner top right">
+<datalist id="sizes">
+  <option value="s">Small</option>
+  <option value="m">Medium</option>
+  <option value="l">Large</option>
+</datalist>
+
+---
+
+hidden: true
+hidden_new: true
+body_class: elements-fill
+class: nobackground
+content_class: flexbox vcenter
+
+<h2 class="faded">Elements have <em>APIs</em></h2>
+
+---
+
+hidden: true
+hidden_new: true
+class: large
+content_class: flexbox vcenter
+
+<pre class="nohighlight">
+select.onchange = function() {
+  var idx = this.selectedIndex;
+  var val = this.options[idx].value;
+};
+</pre>
+
+<selecty-element class="auto-fadein">My DOM exposes <b>properties/methods</b> in JS.<br>I fire <b>events</b> when interesting things happen.</selecty-element>
+
+---
+
+hidden: true
+class: large nobackground
+content_class: flexbox vcenter
+
+<img data-src="images/screenshots/HTMLSelectElement.png" class="full">
+
+
+------
+
+hidden:true
+title: Encapsulated elements without Polymer
+class: comparetovanilla
+content_class: flexbox vcenter
+
+<div>
+<template is="auto-binding">
+<div>
+<h3><img src="images/logos/webcomponents_new.svg"> vanilla web components</h3>
+<code-cycler class="prettyprint" selected="{{selected}}" style="font-size:20px;">
+  <textarea>
+    var proto = Object.create(HTMLElement.prototype, {
+      createdCallback: {
+        value: function() {
+          this.createShadowRoot().innerHTML = '<h2>Eric Bidelman</h2><img src="profile.png">';
+        }
+      }
+    });
+    document.registerElement('profile-card', {prototype: proto});
+  </textarea>
+</code-cycler>
+</div>
+<div>
+<h3><img src="images/polymer/p-logo-square.png"> polymer</h3>
+<code-cycler class="prettyprint" selected="{{selected}}" style="font-size:20px;">
+  <textarea>
+    <polymer-element name="profile-card" noscript>
+      <template>
+        <h2>Eric Bidelman</h2>
+        <img src="profile.png">
+      </template>
+    </polymer-element>
+  </textarea>
+</code-cycler>
+</div>
+</template>
+</div>
+
+---
+
+hidden:true
+title: Encapsulated components without Polymer :(
+
+    <template id="template">
+      <style>h2 { color: red; }</style>
+      <h2>Eric Bidelman</h2>
+      <img src="profile.png">
+    </template>
+
+    <script>
+      var proto = Object.create(HTMLElement.prototype, {
+        createdCallback: {
+          value: function() {
+            var t = document.querySelector('#template');
+
+            // Encapsulate content using Shadow DOM.
+            this.createShadowRoot().appendChild(document.importNode(t.content, true));
+          }
+        }
+      });
+
+      var MyInput = document.registerElement('profile-card', {prototype: proto});
+    </script>
+
+
+---
+
+hidden: true
+id: spacevideo2
+body_class: black
+class: nobackground fullviewport
+content_class: flexbox vcenter centered
+
+<video data-src="videos/universe2.webm" style="height: 100%;width:initial !important;"></video>
+<audio data-src="audio/Stellardrone-Glittering.ogg" loop></audio>
+
+---
+
+hidden: true
+id: spacevideo
+body_class: black
+class: nobackground fullviewport do-transition
+content_class: flexbox vcenter centered
+
+<video data-src="videos/universe.webm" class="fullviewport"></video>
+<audio data-src="audio/Stellardrone-Glittering.ogg" loop></audio>
+
+---
+
+hidden: true
+id: hangoutsexample
+title: Web components makes markup meaningful (again)
+
+<pre class="prettyprint" data-lang="html" data-run-demo2>
+&lt;hangout-chat from="Paul, Addy" profile="118075791">
+  &lt;hangout-message from="Paul" profile="img.png" datetime="2013-07-17T12:02">
+    &lt;p>Feelin' this Web Components thing.&lt;/p>
+    &lt;p>Heard of it?&lt;/p>
+  &lt;/hangout-message>
+  ...
+&lt;/hangout-chat>
+</pre>
+
+<!-- <link rel="import" href="demos/components/hangouts/elements/hangouts.html"> -->
+
+<div>
+  <button>New chat</button>
+</div>
+
+<div class="example">
+  <!-- <hangout-module from="Paul Irish" profile="118075919496626375791"></hangout-module> -->
+</div>
+
+---
+
+hidden: true
+id: declarative-registration-proto
+title: Declarative registration
+subtitle: adding a prototype
+body_class: core-bg
+
+<code-cycler class="prettyprint larger">
+  <template selected>
+    &lt;polymer-element name="hello-element" noscript&gt;
+      &lt;template&gt;
+        &lt;h2&gt;I can say hello&lt;/h2&gt;
+      &lt;/template&gt;
+    &lt;/polymer-element&gt;
+  </template>
+  <template>
+    &lt;polymer-element name="hello-element"&gt;
+      &lt;template&gt;
+        &lt;h2&gt;I can say hello&lt;/h2&gt;
+      &lt;/template&gt;
+      &lt;script&gt;
+        <b>Polymer('hello-element', {
+          sayHello: function() { alert('Howdy folks!'); }
+        });</b>
+      &lt;/script&gt;
+    &lt;/polymer-element&gt;
+  </template>
+  <template>
+    &lt;polymer-element name="hello-element"&gt;
+      &lt;template&gt;
+        <b>&lt;link rel="stylesheet" href="hello-element.css"></b>
+        &lt;h2&gt;I can say hello&lt;/h2&gt;
+      &lt;/template&gt;
+      <b>&lt;script src="hello-element.js">&lt;/script&gt;</b>
+    &lt;/polymer-element&gt;
+  </template>
+</code-cycler>
+
+<div class="component-demo">
+  <output style="display: block; padding: 10px;">
+    <hello-element></hello-element>
+  </output>
+</div>
+
+---
+
+title: Interoperability
+subtitle: "on by default"
+content_class: centered
+
+<img data-src="images/screenshots/arv_interop.png" style="height:400px;border:1px solid #ccc;border-radius:5px">
+
+---
+
+hidden: true
+title: Interoperability
+subtitle: "on by default"
+
+HTML/DOM is the foundation every framework understands
+
+<!-- <label class="good"></label> -->
+
+<pre class="prettyprint">
+&lt;x-flipbox id="flipper"> &lt;!-- implemented with x-tags -->
+  &lt;paper-tabs heading="Tab heading"> &lt;!-- implemented with Polymer -->
+    &lt;paper-tab">Tab 1&lt;/polymer-panel>
+    &lt;paper-tab">Tab 2&lt;/polymer-panel>
+  &lt;/paper-tabs>
+&lt;/x-flipbox>
+
+&lt;button>Flip!&lt;/button> <!-- Vanilla HTML -->
+
+&lt;script>
+document.querySelector('button').addEventListener('click', function(e) {
+  document.querySelector('#flipper').toggle(); 
+});
+&lt;/script>
+</pre>
+
+<span class="source faded">Reading: <a href="http://www.polymer-project.org/articles/polymer-xtag-vanilla.html">Custom Element Interoperability</a></span>
+
+---
+
+hidden: true
+title: Workflow
+body_class: googleblue
+class: segue
+
+---
+
+hidden: true
+title: Starting an app
+#class: screenshot
+
+1. Find
+- Import
+- Use
+
+Find what you need:
+
+<img data-src="images/slides/custom_elements.io.png" class="screenshot" style="height:400px;width:50%">
+
+Installs the goods
+
+<pre class="prettyprint">
+$ bower install <b>Polymer/platform</b>
+$ bower install <b>PolymerLabs/google-map</b>
+$ bower install <b>ebidel/geo-location</b>
+</pre>
+
+<!-- <code-cycler class="prettyprint nohighlight" style="font-size:50px;line-height: 1.4;">
+  <template escaped>
+    bower install <b>Polymer/platform</b>
+  </template>
+  <template escaped>
+    &lt;script src="<b>platform.js</b>">&lt;/script>
+  </template>
+</code-cycler> -->
+
+---
+
+hidden: true
+title: Minify JS/CSS
+
+<code-cycler class="prettyprint larger">
+  <textarea escaped>
+    &lt;polymer-element name="hello-element"&gt;
+      &lt;template&gt;
+        &lt;style>h2 { color: papayawhip; }&lt;/style>
+        &lt;h2&gt;Hello, &lt;content>&lt;/content>&lt;/h2&gt;
+      &lt;/template&gt;
+      &lt;script&gt;
+        Polymer('hello-element', {
+          ...
+        });
+      &lt;/script&gt;
+    &lt;/polymer-element&gt;
+  </textarea>
+  <template escaped>
+    &lt;polymer-element name="hello-element"&gt;
+      &lt;template&gt;
+        <b>&lt;link rel="stylesheet" href="hello-element.css"></b>
+        &lt;h2&gt;Hello, &lt;content>&lt;/content>&lt;/h2&gt;
+      &lt;/template&gt;
+      <b>&lt;script src="hello-element.js">&lt;/script&gt;</b>
+    &lt;/polymer-element&gt;
+  </template>
+</code-cycler>
+
+---
+
+hidden: true
+title: Using third party libs
+
+TODO
+
+<pre class="prettyprint larger">
+<b>&lt;link rel="import" href="jquery.html"></b>
+
+&lt;polymer-element name="hello-element"&gt;
+  &lt;template&gt;...&lt;/template&gt;
+  &lt;script&gt;
+    Polymer('hello-element', {
+      ready: function() {
+
+      }
+    });
+  &lt;/script&gt;
+&lt;/polymer-element&gt;
+</pre>
+
+---
+
+hidden: true
+title: Things to look forward to
+body_class: googleblue
+class: segue
+
+---
+
+hidden: true
+title: ES6 classes
+
+    class MyTag extends HTMLElement {
+      createdCallback() {
+        /* constructor */
+      }
+      attachedCallback() {
+        /* inserted into visible document */
+      }
+      detachedCallback() {
+        /* removed from visible document */
+      }
+      attributeChangedCallback(oldValue, newValue) {
+        /* react to declarative changes */
+      }
+    };
+
+    document.registerElement('my-tag', MyTag);
+
+---
+
+hidden: true
+body_class: googleblue
+content_class: flexbox vleft
+
+<h2 class="faded" style="font-size: 60px; line-height: 1.25;">Web Components are a set of <em>emerging standards</em> that allow developers to <em>extend HTML</em> and its functionality.</h2>
+
+----
+
+title: Common way to extend
+subtitle: Inherit the UI and/or API of another element
+
+<div class="build">
+<div><p>Extend other custom elements:</p>
+<pre class="prettyprint">
+&lt;polymer-element name="map-with-markers" extends="google-map" attributes="fitToMarkers">
+</pre>
+<pre class="prettyprint">
+&lt;map-with-markers fitToMarkers>
+  &lt;google-map-marker lat="37.779" lng="-122.3892">&lt;/google-map-marker>
+  &lt;google-map-marker lat="37.7644376" lng="-122.4233082">&lt;/google-map-marker>
+&lt;/map-with-markers>
+</pre>
+</div>
+<div><p>Extend native HTML elements:</p>
+<pre class="prettyprint larger">
+&lt;button is="super-button">&lt;/button>
+</pre>
+</div>
+</div>
+
+---
+
+body_class: core-fill
+class: nobackground wikipedia
+content_class: flexbox vcenter
+
+<h2>
+  A Polymer is a large molecule composed of many repeated subunits, known as monomers.
+</h2>
+
+<span class="source faded"><a href="http://en.wikipedia.org/wiki/Polymer">wikipedia.org/wiki/Polymer</a></span>
+
+---
+
+body_class: core-fill
+class: nobackground wikipedia
+content_class: flexbox vcenter
+
+<h2 class="faded">
+  A <em>Polymer</em> is a large <em>molecule</em> composed of many <em>repeated subunits</em>, known as <em>monomers</em>.
+</h2>
+
+<span class="source faded"><a href="http://en.wikipedia.org/wiki/Polymer">wikipedia.org/wiki/Polymer</a></span>
+
+---
+
+body_class: core-fill
+class: nobackground wikipedia
+content_class: flexbox vcenter
+
+<h2 class="faded line">
+  A <em>Polymer</em> is a large <em>molecule</em> composed of many <em>repeated subunits</em>, known as <em>monomers</em>.
+</h2>
+
+<span class="source faded"><a href="http://en.wikipedia.org/wiki/Polymer">wikipedia.org/wiki/Polymer</a></span>
+
+---
+
+body_class: core-fill
+class: nobackground wikipedia
+content_class: flexbox vcenter
+
+<h2 class="faded">
+  A <em>web app</em> is a large <em>collection of web components</em> composed of many <em>subelements</em>, known as <em>custom elements</em>.
+</h2>
+
+<span class="source faded">-me</span>
+
+

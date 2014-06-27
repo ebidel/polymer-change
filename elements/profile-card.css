@@ -1,0 +1,71 @@
+:host {
+  display: inline-flex;
+  border-radius: 3px;
+  border: 1px solid #ccc;
+  padding: 15px;
+  position: relative;
+
+  background: url('https://lh6.googleusercontent.com/-TvhFSsqj7FY/UAxGo4M6ZgI/AAAAAAAAEtE/qa8vgb_TNSE/s300-fcrop64=1,155f2fffeb92cceb/MichiganWolverinesWallpaperHelmetsH.jpeg') no-repeat -150px 50%;
+  /*background-size: cover;*/
+  
+}
+:host(:hover) {
+  box-shadow: 0 0 5px #ccc;
+}
+:host > div  {
+  display: flex;
+  
+}
+a {
+  text-decoration: none;
+  font-size: 20px;
+  color: black;
+  text-align: right;
+}
+img {
+  border-radius: 50%;
+  border: 7px solid #fff;
+  box-shadow: 0 0 7px #000;
+  width: 100px;
+  height: 100px;
+}
+#info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-left: 45px;
+}
+h2, h3 {
+  font-weight: 400;
+  margin: 0;
+  color: navy;
+}
+h3 {
+  font-weight: 300;
+  color: #ffcc00;
+  flex: 1;
+  margin: 10px 0 0 0;
+}
+
+:host(profile-card4) ::content h2,
+:host(profile-card4) ::content h3 {
+  font-weight: 400;
+  font-size: 40px;
+  margin: 0;
+  color: navy;
+  line-height: 1;
+}
+:host(profile-card4) ::content h3 {
+  font-weight: 300;
+  font-size: 30px !important;
+  color: #ffcc00;
+  flex: 1;
+  margin: 10px 0 0 0;
+  line-height: 1;
+}
+:host(profile-card4) ::content a {
+  text-decoration: none;
+  font-size: 20px;
+  color: black;
+  text-align: right;
+}
